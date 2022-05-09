@@ -1,0 +1,52 @@
+name: 'Terraform'
+
+on:
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: production
+
+# use the bash shell regardless wheather the github action runner is ubuntu-latest , macos-latest , or windows-latest 
+defaults:
+   run:
+    shell: bash
+
+steps:
+# checkout the repositry to the github action runner
+- name: checkout
+  uses: actions/checkout@v2
+
+# install the latest version of terraform CLI and configure the terraform CLI configure file with terraform Cloud user API token
+- name: Setup Terraform
+  uses: hashicorp/setup-terraform@v1
+  with:
+    cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+# Initialize a new or existing Terraform working directory by creating initial files, loading any remot state, downloading modules, etc.
+- name: Terraform Init
+  run : terraform init
+
+#checks that all  terraform configure files adhere to canonical format
+#- name: Terraform Format
+# run: terraform fmt -check
+
+#configure aws_credentials
+- name: configure AWS Credentials
+  uses: aws-actions/configure-aws-credentials@v1
+  with:
+    aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    # aws-session-tokenL ${{ secrets.AWS_SESSION_TOKEN }} # if you have/need it
+    aws-region: us-east-1
+
+# Generates an execution plan for Terraform
+- name: Terraform Plan
+  run: terraform plan
+
+#generate an execution apply for terraform 
+- name: Terraform Apply
+  if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+  run: terraform apply -auto-approve
