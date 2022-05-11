@@ -1,6 +1,6 @@
 device_name = {
   "ami-0022f774911c1d690" = {
-    availability_zone = "ap-south-1"
+    availability_zone = "ap-south-1a"
 
   size= 8
   encrypted = true
@@ -16,7 +16,7 @@ device_name = {
 }
 
   "ami-0022f774911c1d690" ={
-  availability_zone = "ap-south-1"
+  availability_zone = "ap-south-1b"
 
   size= 8
   encrypted = true
