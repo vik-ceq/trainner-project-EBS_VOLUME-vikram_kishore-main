@@ -1,5 +1,5 @@
-device_name ={
-  "ami-0851b76e8b1bce90b" ={
+device_name = {
+  "ami-0022f774911c1d690" = {
     availability_zone = "ap-south-1"
 
   size= 8
@@ -15,7 +15,7 @@ device_name ={
 
 }
 
-  "ami-0851b76e8b1bce90b" ={
+  "ami-0022f774911c1d690" ={
   availability_zone = "ap-south-1"
 
   size= 8
