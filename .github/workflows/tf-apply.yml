@@ -48,6 +48,7 @@ jobs:
     #Generate an execution apply for terraform   
     - name: Terraform Apply
        #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: |
+      run: |B4-B0-24-6D-E6-A7
+                            {(ASIAZ3CUIHQKMSJTADLR)}
         cd Example
         terraform apply -auto-approve
